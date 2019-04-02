@@ -8,17 +8,17 @@ export default function setup(registeredRequests, axios, vuexStore, vuexNamespac
             return request;
         }
     }, function (error) {
-        setRequestFinished(error, registeredRequests, axios, vuexStore, vuexNamespace);
+        setRequestFinished(error, registeredRequests, vuexStore, vuexNamespace);
 
         return Promise.reject(error);
     });
 
     axios.interceptors.response.use(function(response) {
-        setRequestFinished(response, registeredRequests, axios, vuexStore, vuexNamespace);
+        setRequestFinished(response, registeredRequests, vuexStore, vuexNamespace);
 
         return response;
     }, function(error) {
-        setRequestFinished(error, registeredRequests, axios, vuexStore, vuexNamespace);
+        setRequestFinished(error, registeredRequests, vuexStore, vuexNamespace);
 
         return Promise.reject(error);
     });
