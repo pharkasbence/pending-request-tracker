@@ -1,6 +1,6 @@
 export default function setup(registeredRequests, axios, vuexStore, vuexNamespace) {
     axios.interceptors.request.use(function(request) {
-        let currentRequestName = getCurrentRequest(registeredRequests, request.url);
+        let currentRequestName = getCurrentRequestName(registeredRequests, request.url);
 
         if (vuexStore.getters[vuexNamespace + '/' + currentRequestName]() === false) {
             setRequestPending(currentRequestName, vuexStore, vuexNamespace);
@@ -31,14 +31,14 @@ function setRequestPending(currentRequestName, vuexStore, vuexNamespace) {
 }
 
 function setRequestFinished(response, registeredRequests, vuexStore, vuexNamespace) {
-    let currentRequestName = getCurrentRequest(registeredRequests, response.config.url);
+    let currentRequestName = getCurrentRequestName(registeredRequests, response.config.url);
 
     if (currentRequestName) {
         vuexStore.dispatch(vuexNamespace + '/' + currentRequestName, false);
     }
 }
 
-function getCurrentRequest(registeredRequests, url) {
+function getCurrentRequestName(registeredRequests, url) {
     let requestTypes = Object.keys(registeredRequests);
 
     for (let i = 0; i < requestTypes.length; i++) {
