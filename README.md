@@ -1,6 +1,6 @@
 # pending-request-tracker
 
-This package generates a vuex module to track async requests 'pending' status.
+This package generates a vuex module to track the state of async requests.
 
 When you send a request to one of the registered endpoints or receive a response from one of them, it sets the proper 'pending' state value (true or false) via axios interceptors.
 
